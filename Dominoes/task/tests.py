@@ -33,14 +33,14 @@ class TestStage1(StageTest):
         ds = self.get_list(replyk[3])
         return sp, cp, pp, ds
 
-    def get_the_fish(self, cp, pp, ds):
-        st = 'computer' if len(cp) == 7 else 'player'
-        cp = sorted([i for i in cp if i[0] == i[1]], reverse=True)
-        pp = sorted([i for i in pp if i[0] == i[1]], reverse=True)
-        c0 = cp[0] if len(cp) > 0 else []
-        p0 = pp[0] if len(pp) > 0 else []
-        maxes = sorted([ds[0], c0, p0], reverse=True)
-        return maxes[0], st
+    def get_the_fish(self, computer_pieces, player_pieces, domino_snake):
+        status_check = 'computer' if len(computer_pieces) == 7 else 'player'
+        double_computer_pieces = sorted([i for i in computer_pieces if i[0] == i[1]], reverse=True)
+        double_player_pieces = sorted([i for i in player_pieces if i[0] == i[1]], reverse=True)
+        high_double_computer_piece = double_computer_pieces[0] if len(double_computer_pieces) > 0 else []
+        high_double_player_piece = double_player_pieces[0] if len(double_player_pieces) > 0 else []
+        maxes = sorted([domino_snake[0], high_double_computer_piece, high_double_player_piece], reverse=True)
+        return maxes[0], status_check
 
     def check_nested_lists(self, list_to_check, list_name):
         if list_to_check and type(list_to_check[0]) != list:
@@ -72,6 +72,8 @@ class TestStage1(StageTest):
             return CheckResult.wrong("The full set is not full")
         if len(computer_pieces) + len(player_pieces) + len(domino_snake) != 14:
             return CheckResult.wrong("The pieces played are not right")
+        if len(domino_snake) != 1:
+            return CheckResult.wrong("The domino snake should have exactly one piece")
         domino_snake_check, status_check = self.get_the_fish(computer_pieces, player_pieces, domino_snake)
         if domino_snake[0] != domino_snake_check:
             return CheckResult.wrong("Domino snake is not right")
