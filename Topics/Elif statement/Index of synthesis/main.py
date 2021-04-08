@@ -1,4 +1,7 @@
-index = float(input())
-system_type = "Analytic" if index < 2 else "Polysynthetic" if index > 3 else "Synthetic"
+synthesis_index = float(input())
 
-print(system_type)
+language_type = "Analytic" if synthesis_index < 2 \
+    else "Polysynthetic" if synthesis_index > 3 \
+    else "Synthetic"
+
+print(language_type)
