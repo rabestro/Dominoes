@@ -2,22 +2,16 @@ import random
 
 
 def generate_stock():
-    generated_stock = []
-    for i in range(7):
-        for j in range(0, i + 1):
-            generated_stock.append([j, i])
-    return generated_stock
+    return [[a, b] for a in range(7) for b in range(a, 7)]
 
 
 stock_pieces = generate_stock()
-# print(stock_pieces, len(stock_pieces))
 random.shuffle(stock_pieces)
 
 player_pieces = stock_pieces[0:7]
 computer_pieces = stock_pieces[7:14]
 stock_pieces = stock_pieces[14:]
 domino_snake = []
-# is_player_move = False
 
 for i in range(6, -1, -1):
     piece = [i, i]
