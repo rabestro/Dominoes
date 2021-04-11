@@ -23,10 +23,8 @@ for i in range(6, -1, -1):
             player_pieces.remove(piece)
         break
 
-# print('Player pieces:', player_pieces)
 is_player_turn = len(computer_pieces) == 6
-# print('Status:', 'player' if len(computer_pieces) == 6 else 'computer')
-your_pieces = '\n'.join(f"{i}: {player_pieces[i - 1]}" for i in range(1, len(player_pieces) + 1))
+your_pieces = '\n'.join(f"{i + 1}: {pp}" for i, pp in enumerate(player_pieces))
 
 print(f"""======================================================================
 Stock size: {len(stock_pieces)}
